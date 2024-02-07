@@ -1,0 +1,40 @@
+@using DXWebApplication9.Models
+
+<h2>Aspirantes Inscritos</h2>
+
+<partial name="Export" />
+
+@(
+Html.DevExtreme().DataGrid<Aspirante>()
+    .ID("gridContainer")
+    .ShowBorders(true)
+    .DataSource(d => d.Mvc().Controller("SampleData").LoadAction("Get").Key("Id"))
+    .Paging(p =>
+    {
+        p.PageSize(10);
+    })
+    .Columns(columns => {
+        columns.AddFor(m => m.IdTipoDocumento);
+        columns.AddFor(m => m.NumeroDocumento);
+        columns.AddFor(m => m.Nombres);
+        columns.AddFor(m => m.Apellidos);
+        columns.AddFor(m => m.Telefono);
+        columns.AddFor(m => m.Celular);
+    }) 
+    .Pager(pager =>
+    {
+        pager.Visible(true);
+        pager.DisplayMode(GridPagerDisplayMode.Full);
+        pager.ShowPageSizeSelector(true);
+        pager.AllowedPageSizes(new JS("[5, 10, 'all']"));
+        pager.ShowInfo(true);
+        pager.ShowNavigationButtons(true);
+        pager.Label("Prueba");
+    })
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(f => f.Visible(true))
+    .GroupPanel(p => p.Visible(true))
+    .Grouping(g => g.AutoExpandAll(false))
+    .RemoteOperations(true)
+    
+)

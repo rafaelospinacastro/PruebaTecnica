@@ -1,0 +1,39 @@
+﻿<div class="buttons-demo">
+    <div class="buttons">        
+        <div>
+            <div class="buttons-column">
+                <div>
+                    @(Html.DevExtreme().Button()
+                        .Text("Guardar")
+                        .Type(ButtonType.Default)
+                        .Icon("save")
+                        .StylingMode(ButtonStylingMode.Contained)
+                        .Width(120)
+                        .OnClick("notify")
+                        )
+                </div>
+                <div>
+                    @(Html.DevExtreme().Button()
+                        .Text("Cancelar")
+                        .Type(ButtonType.Danger)
+                        .Icon("clear")
+                        .StylingMode(ButtonStylingMode.Outlined)
+                        .Width(120)
+                        .OnClick("notify")
+                        )
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>
+
+<script>
+    function notify(e) {
+        var buttonText = e.component.option("text");
+        DevExpress.ui.notify("Datos Guardados");
+    }
+    function notify(e) {
+        var buttonText = e.component.option("text");
+        DevExpress.ui.notify("Datos Limpiados");
+    }
+</script>

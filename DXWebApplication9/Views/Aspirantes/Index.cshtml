@@ -1,0 +1,242 @@
+﻿@using DXWebApplication9.Models
+
+<h3>Admisiones</h3>
+
+<h5>Diligencia los campos para poder continuar</h5>
+
+
+<partial name="Delete" />
+
+@(Html.DevExtreme().TabPanel()
+    .Items(items =>
+    {
+        items.Add()
+            .Title("1. Información de Inscripción")
+            .Template(new TemplateName("form2"));
+
+        items.Add()
+            .Title("2. Información Personal")
+            .Template(new TemplateName("form1"));
+    })
+)
+
+@using (Html.DevExtreme().NamedTemplate("form2"))
+{
+    <div id="form">
+        @(Html.DevExtreme().Form<Aspirante>()
+            .ID("form2")
+            .Items(items =>
+            {              
+
+
+                items.AddGroup()
+                .CssClass("second-group")
+                .ColCount(2)
+                .Items(groupItems =>
+                {
+                    groupItems.AddGroup().Items(secondGroupItems =>
+                {
+
+                    secondGroupItems.AddSimpleFor(m => m.IdDepartamento).Label(l => l.Text("Tipo de aspirante"))
+                .Editor(e => e
+                .SelectBox()
+                .InputAttr("aria-label", "State")
+                .DataSource(new[] {
+    "NUEVO", "REINGRESO", "TRANSFERENCIA EXTERNA", "TRANSFERENCIA INTERNA"
+        }
+                )
+                );
+                    secondGroupItems.AddSimpleFor(m => m.IdDepartamento).Label(l => l.Text("Modalidad"))
+                .Editor(e => e
+                .SelectBox()
+                .InputAttr("aria-label", "State")
+                .DataSource(new[] {
+    "PRESENCIAL", "VIRTUAL"
+        }
+                )
+                );
+
+                    secondGroupItems.AddSimpleFor(m => m.IdDepartamento).Label(l => l.Text("Sede"))
+                .Editor(e => e
+                .SelectBox()
+                .InputAttr("aria-label", "State")
+                .DataSource(new[] {
+    "MEDELLIN", "BOGOTA"
+        }
+                )
+                );
+
+                    secondGroupItems.AddSimpleFor(m => m.IdDepartamento).Label(l => l.Text("Programa"))
+                .Editor(e => e
+                .SelectBox()
+                .InputAttr("aria-label", "State")
+                .DataSource(new[] {
+    "ODONTOLOGIA", "INGENIERIA"
+        }
+                )
+                );
+
+                    secondGroupItems.AddSimpleFor(m => m.IdDepartamento).Label(l => l.Text("Periodo Academico"))
+                .Editor(e => e
+                .SelectBox()
+                .InputAttr("aria-label", "State")
+                .DataSource(new[] {
+    "20241", "20242", "20251", "20252"
+        }
+                )
+                );
+
+                });
+
+
+                });
+
+                items.AddGroup()
+                .CssClass("third-group")
+                .ColCount(2)
+                .Items(groupItems =>
+                {
+                    groupItems.AddSimple().Template("<div class='form-avatar'></div>");
+                    groupItems.AddGroup().ColSpan(3).Items(secondGroupItems =>
+                {
+                    secondGroupItems.AddButton()
+                .HorizontalAlignment(HorizontalAlignment.Right)
+                .ButtonOptions(b => b.Text("Anterior")
+                .Type(ButtonType.Default)
+                .Disabled(true)
+                );
+                    secondGroupItems.AddButton()
+                .HorizontalAlignment(HorizontalAlignment.Right)
+                .ButtonOptions(b => b.Text("Siguiente")
+                .Type(ButtonType.Default)
+                );
+                });
+                });
+
+            })
+
+            .FormData(Model)
+            )
+
+    </div>
+}
+
+@using (Html.DevExtreme().NamedTemplate("form1"))
+{
+    <div id="form">
+        @(Html.DevExtreme().Form<Aspirante>()
+            .ID("form1")
+            .Items(items =>
+            {
+                items.AddGroup()
+                .CssClass("first-group")
+                .ColCount(4)
+                .Items(groupItems =>
+                {
+                    groupItems.AddSimple().Template("<div class='form-avatar'></div>");
+                    groupItems.AddGroup().ColSpan(3).Items(secondGroupItems =>
+                    {
+                        secondGroupItems.AddSimpleFor(m => m.Nombres);
+                        secondGroupItems.AddSimpleFor(m => m.Apellidos);
+                    
+                        secondGroupItems.AddSimpleFor(m => m.FechaNacimiento)
+                    .Editor(e => e
+                    .DateBox()
+                    .InputAttr("aria-label", "Date")
+                    .Width("100%")
+                    )
+                    .IsRequired(false);
+                    });
+                });
+
+
+                items.AddGroup()
+                .CssClass("second-group")
+                .ColCount(2)
+                .Items(groupItems =>
+                {
+                    groupItems.AddGroup().Items(secondGroupItems =>
+                    {
+
+                    secondGroupItems.AddSimpleFor(m => m.FechaExpedicion)
+                .Editor(e => e
+                .DateBox()
+                .InputAttr("aria-label", "Date")
+                .Width("100%")
+                )
+                .IsRequired(false);
+            secondGroupItems.AddSimpleFor(m => m.IdCiudad).Label(l => l.Text("Ciudad"));
+            secondGroupItems.AddSimpleFor(m => m.IdSexo).Label(l => l.Text("Sexo"))
+                    .Editor(e => e
+                    .SelectBox()
+                    .InputAttr("aria-label", "Position")
+                    .DataSource(new[] {
+    "Masculino",
+    "Femenino"
+        }
+                    )
+                    .Value("")
+                    );
+                    });
+                    groupItems.AddGroup().Items(secondGroupItems =>
+                    {
+            secondGroupItems.AddSimpleFor(m => m.IdDepartamento).Label(l => l.Text("Departamento"))
+                    .Editor(e => e
+                    .SelectBox()
+                    .InputAttr("aria-label", "State")
+                    .DataSource(new[] {
+    "ANTIOQUIA", "BOGOTA", "VALLE DEL CAUCA"
+        }
+                    )
+                    );
+                        secondGroupItems.AddSimpleFor(m => m.Correo).Label(l => l.Text("Zip Code"));
+                        secondGroupItems.AddSimpleFor(m => m.Celular)
+                    .Editor(e => e
+                    .TextBox()
+                    .Mask("+57 0000000000")
+                    .InputAttr("aria-label", "Mask")
+                    );
+                    secondGroupItems.AddSimpleFor(m => m.IdGrupoSanguineo).Label(l => l.Text("Grupo Sanguineo"))
+                .Editor(e => e
+                .SelectBox()
+                .InputAttr("aria-label", "State")
+                .DataSource(new[] {
+    "O+", "O-"
+        }
+                )
+                );
+                    
+                    });
+
+                    
+                });
+
+                items.AddGroup()
+                .CssClass("third-group")
+                .ColCount(2)
+                .Items(groupItems =>
+                {
+                    groupItems.AddSimple().Template("<div class='form-avatar'></div>");
+                    groupItems.AddGroup().ColSpan(3).Items(secondGroupItems =>
+                {
+                    secondGroupItems.AddButton()
+                .HorizontalAlignment(HorizontalAlignment.Right)
+                .ButtonOptions(b => b.Text("Anterior")
+                .Type(ButtonType.Default)
+                );
+                    secondGroupItems.AddButton()
+                .HorizontalAlignment(HorizontalAlignment.Right)
+                .ButtonOptions(b => b.Text("Siguiente")
+                .Type(ButtonType.Default)
+                );
+                });
+                });
+
+            })
+
+            .FormData(Model)
+            )        
+
+    </div>
+}
+
